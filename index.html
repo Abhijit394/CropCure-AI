@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CropCure AI</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-image: url("assets/images/bgimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed; /* Parallax effect */
+      }
+
+      /* Social Icon Hover Glow */
+      .social-icons a {
+        transition: all 0.3s ease;
+      }
+      .social-icons a:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 10px #00ff7f, 0 0 20px #00ff7f, 0 0 30px #00ff7f;
+        transform: scale(1.1);
+      }
+
+      /* Quick Links Hover Glow */
+      .quick-links a {
+        transition: all 0.3s ease;
+      }
+      .quick-links a:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 8px #00ff7f, 0 0 15px #00ff7f;
+        padding-left: 5px;
+      }
+
+      /* Glassmorphism Card */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .glass-card:hover {
+        box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
+        transform: scale(1.02);
+      }
+
+      /* Hero Section Parallax Style */
+      .hero-section {
+        min-height: 80vh;
+        background-image: url("assets/images/forest-hero.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: white;
+        padding: 0 2rem;
+      }
+      .hero-section .sub-title {
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+      .hero-section .main-title {
+        font-size: 4rem;
+        font-weight: 800;
+      }
+      /* Footer */
+      footer {
+        background: #0b2e13;
+        color: #fff;
+        padding: 0 0;
+        text-align: center;
+      }
+
+      /* LEAF SECTION CSS CODE */
+
+      .btn-gradient {
+        background: linear-gradient(135deg, #00ff7f, #008000);
+        color: #fff;
+        font-weight: bold;
+        padding: 12px 0;
+        font-size: 18px;
+        transition: transform 0.2s ease;
+      }
+      .btn-gradient:hover {
+        transform: scale(1.05);
+      }
+
+      /* Camera Capture Custom UI */
+      #cameraModal .modal-content.bg-gradient {
+        background: linear-gradient(180deg, #0b2e13, #204c3c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #captureBtn {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00ff7f, #008000);
+        color: white;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      #captureBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
+      }
+
+      /* Custom File Upload */
+      .custom-file-upload {
+        position: relative;
+        border: 2px dashed rgba(0, 0, 0, 0.4);
+        border-radius: 15px;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: rgb(0, 0, 0);
+      }
+
+      .custom-file-upload:hover {
+        background: rgba(0, 255, 127, 0.15);
+        border-color: #00ff7f;
+        box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
+      }
+
+      .upload-label {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: rgb(0, 0, 0);
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================== Header ===================================== -->
+    <header class="main-header py-3 px-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="logo fw-bold fs-4">
+          🌾 <span class="text-muted">CropCure AI</span>
+        </div>
+
+        <!-- Hamburger button for mobile -->
+        <button
+          class="navbar-toggler d-md-none btn btn-outline-success"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileNavbar"
+        >
+          <i class="bi bi-list fs-2"></i>
+        </button>
+
+        <!--================================= Navbar links======================== -->
+        <nav
+          class="d-none d-md-flex gap-4 align-items-center"
+          id="mobileNavbar"
+        >
+          <!-- Close button (only visible in overlay mode) -->
+          <button
+            class="close-btn d-md-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mobileNavbar"
+          >
+            &times;
+          </button>
+
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="/pages/about.html" class="nav-link">About</a>
+          <a href="pages/blog.html" class="nav-link">Blog</a>
+          <a href="pages/contactus.html" class="nav-link">Contact Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ============================ Hero Section with Parallax========================== ======= -->
+    <section class="hero-section" data-aos="fade-up">
+      <div class="hero-text" data-aos="fade-right">
+        <h2 class="sub-title"></h2>
+        <br />
+        <h4 class="sub-title">INTERNATIONAL DAY OF</h4>
+        <h1 class="main-title">FOREST</h1>
+        <p class="desc">Save Forests and Stay Healthy</p>
+        <p class="desc-text" style="max-width: 500px">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <a href="#" class="btn btn-success mt-3">KNOW MORE</a>
+      </div>
+    </section>
+
+    <!-- =======================🌿 Leaf Disease Detection for camera ================================== -->
+
+    <!-- Leaf Disease Detection App-Like Section -->
+    <!-- ===================== Capture Leaf Picture Section ===================== -->
+    <div class="container mt-5" data-aos="zoom-in">
+      <div class="card p-4 glass-card shadow-lg border-0 text-center">
+        <h2 class="text-success mb-4">🌿 Capture Leaf Picture</h2>
+
+        <!-- Desktop Warning -->
+        <div id="desktop-warning" class="alert alert-danger d-none text-center">
+          🚫 This feature works only on mobile devices.
+        </div>
+
+        <div id="mobile-section">
+          <!-- Open Camera Button -->
+          <div class="custom-file-upload mb-3">
+            <button
+              class="btn btn-gradient w-75 rounded-pill"
+              data-bs-toggle="modal"
+              data-bs-target="#cameraModal"
+            >
+              📸 Open Camera
+            </button>
+          </div>
+
+          <!-- Captured Image Preview -->
+          <div class="text-center mb-3">
+            <img
+              id="capturedPreview"
+              src=""
+              alt="Captured Leaf"
+              class="d-none img-fluid rounded shadow"
+              style="max-width: 250px; border: 2px solid #00ff7f"
+            />
+          </div>
+
+          <!-- Analyze Button -->
+          <div class="d-grid">
+            <button
+              id="captureAnalyzeBtn"
+              class="btn btn-gradient rounded-pill mt-2"
+              type="button"
+            >
+              Analyze Captured Leaf
+            </button>
+          </div>
+
+          <!-- Prediction Result -->
+          <div class="mt-4 d-none" id="capture-result-section">
+            <h5>🧪 Prediction Result:</h5>
+            <div id="captureResult" class="alert alert-info">
+              No prediction yet.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--================================================Camera Modal ===========================================- -->
+
+    <div class="modal fade" id="cameraModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen">
+        <div
+          class="modal-content bg-gradient text-white d-flex flex-column align-items-center justify-content-center"
+        >
+          <div class="text-center">
+            <video
+              id="camera"
+              autoplay
+              playsinline
+              class="rounded shadow w-100 mb-3"
+              style="max-width: 500px"
+            ></video>
+            <button
+              id="captureBtn"
+              type="button"
+              class="btn btn-success btn-lg rounded-circle shadow-lg"
+            >
+              📸
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--============================================ Result Modal =======================================-->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4 rounded shadow-lg">
+          <div id="loader" class="mb-3">
+            <div
+              class="spinner-border text-success"
+              role="status"
+              style="width: 4rem; height: 4rem"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div id="resultText" class="h5 text-success d-none"></div>
+          <button
+            type="button"
+            class="btn btn-outline-success mt-3"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Upload Leaf Picture Section ===================== -->
+
+    <div class="container mt-5" data-aos="zoom-in">
+      <div class="card p-4 glass-card shadow-lg border-0">
+        <h2 class="text-center text-success mb-4">🌿 Upload Leaf Picture</h2>
+
+        <form
+          id="upload-form"
+          enctype="multipart/form-data"
+          class="text-center"
+        >
+          <!-- Custom File Upload UI -->
+          <div class="custom-file-upload mb-3">
+            <input
+              type="file"
+              id="leafImage"
+              name="leafImage"
+              accept="image/*"
+              required
+              hidden
+            />
+            <label for="leafImage" class="upload-label">
+              <i class="bi bi-upload fs-3"></i>
+              <span class="mt-2 d-block">Choose Leaf Image</span>
+            </label>
+            <small class="text-light-50 d-block mt-2"
+              >Supported formats: JPG, PNG</small
+            >
+          </div>
+
+          <!-- Image Preview -->
+          <div class="text-center mb-3">
+            <img
+              id="previewImage"
+              src=""
+              alt="Preview"
+              class="d-none img-fluid rounded shadow"
+              style="max-width: 250px; border: 2px solid #00ff7f"
+            />
+          </div>
+
+          <!-- Analyze Button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-gradient rounded-pill mt-2">
+              Analyze
+            </button>
+          </div>
+        </form>
+
+        <!-- Prediction Result (hidden by default) -->
+        <div class="mt-4 d-none" id="result-section">
+          <h5>🧪 Prediction Result:</h5>
+          <div id="result" class="alert alert-info">No prediction yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================== Footer Section ============================== -->
+    <footer
+      class="footer text-white mt-5 position-relative"
+      style="
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 50, 0, 0.8)
+        );
+      "
+    >
+      <div class="container py-5">
+        <div class="row">
+          <!-- Logo & About -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <h4 class="fw-bold">
+              🌾 Driems <span class="text-success">University</span>
+            </h4>
+            <p style="font-size: 14px">
+              Dedicated to preserving forests and promoting sustainability for a
+              better tomorrow.
+            </p>
+          </div>
+
+          <!------------------------ Quick Links ------------->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <h5 class="fw-bold mb-3">Quick Links</h5>
+            <ul class="list-unstyled quick-links">
+              <li>
+                <a href="/index.html" class="text-white text-decoration-none"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pages/about.html"
+                  class="text-white text-decoration-none"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pages/blog.html"
+                  class="text-white text-decoration-none"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pages/contactus.html"
+                  class="text-white text-decoration-none"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!---------------------- Contact Info --------------------------->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <h5 class="fw-bold mb-3">Contact Us</h5>
+            <p class="mb-1">
+              <i class="bi bi-geo-alt-fill text-success"></i> Driems University,
+              Odisha, India
+            </p>
+            <p class="mb-1">
+              <i class="bi bi-telephone-fill text-success"></i> +91 9233-X-6789
+            </p>
+            <p>
+              <i class="bi bi-envelope-fill text-success"></i> info@driems.edu
+            </p>
+
+            <!------------------- Social Icons ---------------->
+            <div class="social-icons mt-2">
+              <a
+                href="https://www.facebook.com/share/16DyRKzYx7/"
+                class="text-white me-3 fs-5"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="text-white me-3 fs-5"
+                ><i class="bi bi-twitter"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/__qui_ncy__?igsh=MXJxczNlZmJ0dDVnNA=="
+                class="text-white fs-5"
+                ><i class="bi bi-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!---------------------- Bottom Bar ------------------->
+      <div
+        class="text-center py-3"
+        style="background: rgba(0, 0, 0, 0.9); font-size: 14px"
+      >
+        © 2025 Driems University.<br />
+      </div>
+    </footer>
+
+    <!---------------------- Bootstrap JS ------------------------>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+    </script>
+
+    <!---------- Custom JS ---------------->
+    <script src="js/script.js"></script>
+  </body>
+</html>

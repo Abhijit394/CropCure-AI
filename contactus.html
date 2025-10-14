@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CropCure AI</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Animate CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-image: url("assets/images/26905.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed; /* Parallax effect */
+      }
+
+      /* Social Icon Hover Glow */
+      .social-icons a {
+        transition: all 0.3s ease;
+      }
+      .social-icons a:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 10px #00ff7f, 0 0 20px #00ff7f, 0 0 30px #00ff7f;
+        transform: scale(1.1);
+      }
+
+      /* Quick Links Hover Glow */
+      .quick-links a {
+        transition: all 0.3s ease;
+      }
+      .quick-links a:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 8px #00ff7f, 0 0 15px #00ff7f;
+        padding-left: 5px;
+      }
+
+      /* Glassmorphism Card */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .glass-card:hover {
+        box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
+        transform: scale(1.02);
+      }
+
+      /* Hero Section Parallax Style */
+      .hero-section {
+        min-height: 80vh;
+        background-image: url("assets/images/forest-hero.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: white;
+        padding: 0 2rem;
+      }
+      .hero-section .sub-title {
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+      .hero-section .main-title {
+        font-size: 4rem;
+        font-weight: 800;
+      }
+
+      .main-header {
+        position: sticky;
+        top: 0;
+        /* background: #2d6a4f; */
+        color: #2d6a4f;
+        padding: 15px 0;
+        z-index: 1000;
+        text-align: center;
+        background-color: white;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      /* Social Icon Hover Glow */
+      .social-icons a {
+        transition: all 0.3s ease;
+      }
+      .social-icons a:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 10px #00ff7f, 0 0 20px #00ff7f, 0 0 30px #00ff7f;
+        transform: scale(1.1);
+      }
+
+      /* Quick Links Hover Glow */
+      .quick-links a {
+        transition: all 0.3s ease;
+      }
+      .quick-links a:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 8px #00ff7f, 0 0 15px #00ff7f;
+        padding-left: 5px;
+      }
+
+      /* Glassmorphism Card */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .glass-card:hover {
+        box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
+        transform: scale(1.02);
+      }
+
+      /* Hero Section Parallax Style */
+      .hero-section {
+        min-height: 80vh;
+        background-image: url("assets/images/forest-hero.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: white;
+        padding: 0 2rem;
+      }
+      .hero-section .sub-title {
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+      .hero-section .main-title {
+        font-size: 4rem;
+        font-weight: 800;
+      }
+
+      /* Hero Section */
+      .contact-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("/assets/images/leaf-img-banner.jpg") center/cover no-repeat;
+        color: #fff;
+        text-align: center;
+        padding: 120px 20px;
+        animation: fadeInDown 1.5s ease-in-out;
+      }
+
+      .contact-hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .contact-hero p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+      }
+
+      /* Contact Form */
+      .contact-form {
+        background: #fff;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1.5s ease-in-out;
+      }
+
+      .contact-form .form-control {
+        border-radius: 10px;
+        padding: 12px;
+      }
+
+      .contact-form button {
+        background: #198754;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+      }
+
+      .contact-form button:hover {
+        background: #145c39;
+        transform: scale(1.05);
+      }
+
+      /* Contact Info Box */
+      .contact-info {
+        background: #198754;
+        color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        height: 100%;
+        animation: fadeInLeft 1.5s ease-in-out;
+      }
+
+      .contact-info i {
+        font-size: 1.5rem;
+        margin-right: 10px;
+      }
+
+      .contact-section {
+        padding: 60px 0;
+      }
+      .contact-card {
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        background: #fff;
+      }
+      .map-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+      .map-wrapper iframe {
+        display: block;
+        width: 100%;
+        border-radius: 15px;
+      }
+      .map-overlay {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        background: rgba(0, 123, 255, 0.9);
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .map-wrapper:hover .map-overlay {
+        opacity: 1;
+      }
+      .map-overlay:hover {
+        background: #0056b3;
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: #0b2e13;
+        color: #fff;
+        padding: 0 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ======================================== Header ===================================== -->
+    <header class="main-header py-3 px-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="logo fw-bold fs-4">
+          🌾 <span class="text-muted">CropCure AI</span>
+        </div>
+
+        <!-- Hamburger button for mobile -->
+        <button
+          class="navbar-toggler d-md-none btn btn-outline-success"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileNavbar"
+        >
+          <i class="bi bi-list fs-2"></i>
+        </button>
+
+        <!--================================= Navbar links======================== -->
+        <nav
+          class="d-none d-md-flex gap-4 align-items-center"
+          id="mobileNavbar"
+        >
+          <!-- Close button (only visible in overlay mode) -->
+          <button
+            class="close-btn d-md-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mobileNavbar"
+          >
+            &times;
+          </button>
+
+          <a href="/index.html" class="nav-link">Home</a>
+          <a href="/pages/about.html" class="nav-link">About</a>
+          <a href="/pages/blog.html" class="nav-link">Blog</a>
+          <a href="/pages/contactus.html" class="nav-link active">Contact Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+      <!-- <h1>Contact Us</h1> -->
+      <h1>Contact Us !!</h1>
+      <p>
+        We’d love to hear from you! Reach out for queries, support, or
+        collaborations.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold animate__animated animate__fadeInDown">
+            Get in Touch
+          </h2>
+          <p class="text-muted animate__animated animate__fadeInUp">
+            We’d love to hear from you! Fill out the form or find us on the map
+            below.
+          </p>
+        </div>
+        <div class="row g-4">
+          <!-- Contact Form -->
+          <div class="col-lg-6">
+            <div class="contact-card animate__animated animate__fadeInLeft">
+              <h4 class="mb-3">Send us a Message</h4>
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    placeholder="Write your message..."
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Google Map -->
+          <div class="col-lg-6">
+            <div class="map-wrapper animate__animated animate__fadeInRight">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.7029433720444!2d85.84724097447263!3d20.975190090284867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190b8fda4cbd47%3A0xe44182d9d40521d5!2sDriems%20University!5e0!3m2!1sen!2sin!4v1691829096272!5m2!1sen!2sin"
+                width="100%"
+                height="400"
+                style="
+                  border: 0;
+                  border-radius: 15px;
+                  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+                "
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              >
+              </iframe>
+              <a
+                href="https://www.driems.ac.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="map-overlay"
+              >
+                Click to open in Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================== Footer Section ============================== -->
+    <footer
+      class="footer text-white mt-5 position-relative"
+      style="
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 50, 0, 0.8)
+        );
+      "
+    >
+      <div class="container py-5">
+        <div class="row">
+          <!-- Logo & About -->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <h4 class="fw-bold">
+              🌾 Driems <span class="text-success">University</span>
+            </h4>
+            <p style="font-size: 14px">
+              Dedicated to preserving forests and promoting sustainability for a
+              better tomorrow.
+            </p>
+          </div>
+
+          <!------------------------ Quick Links ------------->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <h5 class="fw-bold mb-3">Quick Links</h5>
+            <ul class="list-unstyled quick-links">
+              <li>
+                <a href="/index.html" class="text-white text-decoration-none"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pages/about.html"
+                  class="text-white text-decoration-none"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pages/blog.html"
+                  class="text-white text-decoration-none"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pages/contactus.html"
+                  class="text-white text-decoration-none"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!---------------------- Contact Info --------------------------->
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <h5 class="fw-bold mb-3">Contact Us</h5>
+            <p class="mb-1">
+              <i class="bi bi-geo-alt-fill text-success"></i> Driems University,
+              Odisha, India
+            </p>
+            <p class="mb-1">
+              <i class="bi bi-telephone-fill text-success"></i> +91 9233-X-6789
+            </p>
+            <p>
+              <i class="bi bi-envelope-fill text-success"></i> info@driems.edu
+            </p>
+
+            <!------------------- Social Icons ---------------->
+            <div class="social-icons mt-2">
+              <a
+                href="https://www.facebook.com/share/16DyRKzYx7/"
+                class="text-white me-3 fs-5"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="text-white me-3 fs-5"
+                ><i class="bi bi-twitter"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/__qui_ncy__?igsh=MXJxczNlZmJ0dDVnNA=="
+                class="text-white fs-5"
+                ><i class="bi bi-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!---------------------- Bottom Bar ------------------->
+      <div
+        class="text-center py-3"
+        style="background: rgba(0, 0, 0, 0.9); font-size: 14px"
+      >
+        © 2025 Driems University.<br />
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
